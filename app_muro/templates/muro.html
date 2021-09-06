@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block titulo %} Pagina el muro{% endblock %}
+
+{% block contenido %}
+
+<h2 class="mt-2 text-light letra">Postear Mensaje</h2>
+<form method="Post" action="/mensajes">
+    {% csrf_token %}
+    <div class="mb-3">
+      <textarea id="message" placeholder="Escribe tu post aqui" class="form-control border border-5" name="messag" id="message" rows=6 cols=8></textarea>
+    </div>
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+    <button type="submit" class="btn btn-primary letra">Postear Mensaje</button>
+    </div>
+  </form>
+
+{% for me in mensajes %}
+<div class="row border border-5 py-3 my-3">
+    <div class="col">
+    <h2 class="text-light letra">Mensaje</h2>
+    <h3 class="text-light letra2">{{me.user}}- {{me.created_at |date:'F dS Y'}}</h3>
+    <p class="bg-light">{{me.message}}</p>
+    </div>
+    <h4 class="text-light ">Comentarios</h4>
+    {% for co in me.comments.all %}
+    <div class=" my-3">
+        <h4 class="text-light col-md-7 offset-md-2">{{co.user_c.name}}</h4>
+        <p class="bg-light col-md-7 offset-md-2"><em>{{co.comment}}</em></p>
+        {% if co.user_c.id == request.session.usuario.id %}
+        <a class="btn btn-primary col-md-7 offset-md-2" href="borrar/{{co.id}}">Borrar</a>
+        {%endif%}
+    </div>
+    {% endfor %}
+    <div class="col border border-3 mx-5">
+        <h3 class="text-light letra">Postea un comentario</h3>
+        <form method="Post" action="/comentarios">
+            {% csrf_token %}
+            <div class="mb-3">
+              <textarea id="comment" placeholder="Escribe tu comentario aqui" class="form-control" name="commen" rows=4 cols=4></textarea>
+              <input type="hidden" name="mensaje_id" value="{{me.id}}">
+            </div>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <button type="submit" class="btn btn-success me-md-2 my-2 letra">Postear Comentario</button>
+        </div>  
+        </form>
+    </div>
+</div>
+{% endfor %}
+
+{% endblock %} 

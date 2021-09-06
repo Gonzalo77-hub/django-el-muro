@@ -1,0 +1,17 @@
+.fondo{
+
+background: linear-gradient(163deg, #8A0808 1px, #8A0808 14px, transparent 14px), 
+linear-gradient(161deg, #8A0808 1px, #8A0808 2px, #8A0808 15px, transparent 15px),
+linear-gradient(343deg, #8A0808 1px, #8A0808 14px, transparent 14px), 
+linear-gradient(343deg, #8A0808 1px, #8A0808 14px, transparent 14px); 
+background-color:#000; background-position: 2px 1px, 23px 16px,48px 15px, 21px 30px;
+background-size: 48px 30px;}
+
+.letra{
+
+    font-family: cursive;
+}
+.letra2{
+font-family: fantasy;
+
+}
